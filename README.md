@@ -1,2 +1,2 @@
 # appsFlutter
-conjunto de aplicações em flutter
+Conjunto de aplicações em flutter

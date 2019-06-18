@@ -15,6 +15,7 @@ class _HomeState extends State<Home> {
   void _changePeople(int delta) {
     setState(() {
       _countPeople += delta;
+      
     });
   }
 
