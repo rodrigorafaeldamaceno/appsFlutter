@@ -13,7 +13,11 @@ Future<Map> getData() async {
 }
 
 void main() async {
-  runApp(MaterialApp(title: 'Conversor', home: Home()));
+  runApp(MaterialApp(
+    title: 'Conversor',
+    home: Home(),
+    theme: ThemeData(hintColor: Colors.amber, primaryColor: Colors.white),
+  ));
 }
 
 class Home extends StatefulWidget {
@@ -25,6 +29,7 @@ class _HomeState extends State<Home> {
   double dolar;
   double euro;
   double btc;
+
 
   @override
   Widget build(BuildContext context) {
@@ -66,13 +71,50 @@ class _HomeState extends State<Home> {
                     ),
                   );
                 } else {
-                  print(snapshot.data['results']['currencies']);
+                  //print(snapshot.data);
                   dolar = snapshot.data['results']['currencies']['USD']['buy'];
                   euro = snapshot.data['results']['currencies']['EUR']['buy'];
-                  //btc = snapshot.data['results']['currencies']['bitcoin']['buy'];
+                  btc = snapshot.data['results']['currencies']['BTC']['buy'];
 
                   print('Dolar: $dolar \nEuro: $euro \nBitcoin: $btc');
-                  return Container();
+                  return SingleChildScrollView(
+                    padding: EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.monetization_on,
+                            size: 150, color: Colors.amber),
+                        TextField(
+                          decoration: InputDecoration(
+                              labelText: 'Reais',
+                              labelStyle: TextStyle(color: Colors.amber),
+                              border: OutlineInputBorder(),
+                              prefixText: 'R\$ '),
+                          style: TextStyle(color: Colors.amber, fontSize: 25.0),
+                        ),
+                        TextField(
+                            decoration: InputDecoration(
+                                labelText: 'Dólar',
+                                labelStyle: TextStyle(color: Colors.amber),
+                                border: OutlineInputBorder(),
+                                prefixText: '\$ '),
+                            style:
+                                TextStyle(color: Colors.amber, fontSize: 25.0)),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: 'BTC',
+                            labelStyle: TextStyle(color: Colors.amber),
+                            border: OutlineInputBorder(),
+                            //prefixIcon: Icon( Icons.attach_money),
+                          ),
+                          style: TextStyle(color: Colors.amber, fontSize: 25.0),
+                        )
+                      ],
+                    
+                    ),
+
+
+                  );
                 }
             }
           },
