@@ -25,9 +25,16 @@ dependencies:
   cupertino_icons: ^0.1.2
   http: ^0.12.0+2        # ADICIONE ESTA LINHA AO SEU PUBSPEC
 
+
+  #fonte de icones
+  font_awesome_flutter: ^8.4.0
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
+  
 
 
 # For information on the generic Dart part of this file, see the
@@ -71,3 +78,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+
+

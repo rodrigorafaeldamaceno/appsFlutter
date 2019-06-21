@@ -89,7 +89,6 @@ class _HomeState extends State<Home> {
                         return 'Insira o peso';
                       }
                     },
-                    
                   ),
                   TextFormField(
                     keyboardType: TextInputType.number,
