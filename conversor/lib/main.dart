@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
   Widget _buildTextField(String label, String prefix,
       TextEditingController controller, Function func) {
     return TextField(
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.numberWithOptions(decimal: true),
       decoration: InputDecoration(
           labelText: label,
           labelStyle: TextStyle(color: Colors.amber),

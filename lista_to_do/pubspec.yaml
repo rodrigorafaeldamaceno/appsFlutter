@@ -1,4 +1,4 @@
-name: conversor
+name: lista_to_do
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -23,19 +23,12 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
-  http: ^0.12.0+2        # ADICIONE ESTA LINHA AO SEU PUBSPEC
-  
-
-
-  #fonte de icones
-  font_awesome_flutter: ^8.4.0
+  path_provider: ^1.1.0
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  
-  
 
 
 # For information on the generic Dart part of this file, see the
@@ -79,6 +72,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-
-
-
