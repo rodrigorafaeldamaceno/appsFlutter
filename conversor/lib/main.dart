@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
   Widget _buildTextField(String label, String prefix,
       TextEditingController controller, Function func) {
     return TextField(
-      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      keyboardType: TextInputType.number,
       decoration: InputDecoration(
           labelText: label,
           labelStyle: TextStyle(color: Colors.amber),
@@ -53,23 +53,42 @@ class _HomeState extends State<Home> {
   }
 
   void _realChange(String text) {
-    double real = text != '' ? double.parse(text) : 0;
-    dolarController.text = (real / this.dolar).toStringAsFixed(2);
-    btcController.text = (real / this.btc).toStringAsFixed(8);
+    if (text != '') {
+      text = text.replaceAll(',', '.');
+      double real = double.parse(text);
+
+      dolarController.text = (real / this.dolar).toStringAsFixed(2);
+      btcController.text = (real / this.btc).toStringAsFixed(8);
+    } else {
+      dolarController.text = '';
+      btcController.text = '';
+    }
   }
 
   void _dolarChange(String text) {
-    double dolar = text != '' ? double.parse(text) : 0;
+    if (text != '') {
+      text = text.replaceAll(',', '.');
+      double dolar = double.parse(text);
 
-    realController.text = (dolar * this.dolar).toStringAsFixed(2);
-    btcController.text = (dolar * this.dolar / btc).toStringAsFixed(8);
+      realController.text = (dolar * this.dolar).toStringAsFixed(2);
+      btcController.text = (dolar * this.dolar / btc).toStringAsFixed(8);
+    } else {
+      realController.text = '';
+      btcController.text = '';
+    }
   }
 
   void _btcChange(String text) {
-    double btc = text != '' ? double.parse(text) : 0;
+    if (text != '') {
+      text = text.replaceAll(',', '.');
+      double btc = double.parse(text);
 
-    realController.text = (btc * this.btc).toStringAsFixed(2);
-    dolarController.text = (btc * this.btc / this.dolar).toStringAsFixed(2);
+      realController.text = (btc * this.btc).toStringAsFixed(2);
+      dolarController.text = (btc * this.btc / this.dolar).toStringAsFixed(2);
+    } else {
+      realController.text = '';
+      dolarController.text = '';
+    }
   }
 
   void _refresh() {
