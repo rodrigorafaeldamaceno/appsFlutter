@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'package:buscador_gif/ui/GifPage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:share/share.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
@@ -9,16 +12,26 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String _search;
   int _offSet = 0;
+  String _gifSearch;
+  String _stickerSeacrh;
 
   Future<Map> _getGifs() async {
     http.Response response;
 
-    if (_search == null) {
-      response = await http.get(
-          'https://api.giphy.com/v1/gifs/trending?api_key=R90RJFr48097DIwu8AmbB2aCVi0CaSxW&limit=19&rating=G');
+    if (_search == null || _search.isEmpty) {
+      _gifSearch =
+          'https://api.giphy.com/v1/gifs/trending?api_key=R90RJFr48097DIwu8AmbB2aCVi0CaSxW&limit=19&rating=G';
+      _stickerSeacrh =
+          'https://api.giphy.com/v1/stickers/trending?api_key=R90RJFr48097DIwu8AmbB2aCVi0CaSxW&limit=25&rating=G';
+
+      response = await http.get(_gifSearch);
     } else {
-      response = await http.get(
-          'https://api.giphy.com/v1/gifs/search?api_key=R90RJFr48097DIwu8AmbB2aCVi0CaSxW&q=$_search&limit=19&offset=$_offSet&rating=G&lang=pt');
+      _gifSearch =
+          'https://api.giphy.com/v1/gifs/search?api_key=R90RJFr48097DIwu8AmbB2aCVi0CaSxW&q=$_search&limit=19&offset=$_offSet&rating=G&lang=pt';
+      _stickerSeacrh =
+          'https://api.giphy.com/v1/stickers/search?api_key=R90RJFr48097DIwu8AmbB2aCVi0CaSxW&q=$_search&limit=19&offset=$_offSet&rating=G&lang=en';
+
+      response = await http.get(_gifSearch);
     }
     return json.decode(response.body);
   }
@@ -105,10 +118,24 @@ class _HomePageState extends State<HomePage> {
       itemBuilder: (context, index) {
         if (_search == null || index < snapshot.data['data'].length) {
           return GestureDetector(
-            child: Image.network(
-                snapshot.data['data'][index]['images']['fixed_height']['url'],
-                height: 300.0,
-                fit: BoxFit.cover),
+            child: FadeInImage.memoryNetwork(
+              placeholder: kTransparentImage,
+              image: snapshot.data['data'][index]['images']['fixed_height']
+                  ['url'],
+              height: 300,
+              fit: BoxFit.cover,
+            ),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          GifPage(snapshot.data["data"][index])));
+            },
+            onLongPress: () {
+              Share.share(snapshot.data['data'][index]['images']['fixed_height']
+                  ['url']);
+            },
           );
         } else {
           return Container(
