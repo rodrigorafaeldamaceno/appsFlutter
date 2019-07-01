@@ -13,7 +13,6 @@ class _HomePageState extends State<HomePage> {
   String _search;
   int _offSet = 0;
   String _gifSearch;
-  String _stickerSeacrh;
 
   Future<Map> _getGifs() async {
     http.Response response;
@@ -21,15 +20,11 @@ class _HomePageState extends State<HomePage> {
     if (_search == null || _search.isEmpty) {
       _gifSearch =
           'https://api.giphy.com/v1/gifs/trending?api_key=R90RJFr48097DIwu8AmbB2aCVi0CaSxW&limit=19&rating=G';
-      _stickerSeacrh =
-          'https://api.giphy.com/v1/stickers/trending?api_key=R90RJFr48097DIwu8AmbB2aCVi0CaSxW&limit=25&rating=G';
 
       response = await http.get(_gifSearch);
     } else {
       _gifSearch =
           'https://api.giphy.com/v1/gifs/search?api_key=R90RJFr48097DIwu8AmbB2aCVi0CaSxW&q=$_search&limit=19&offset=$_offSet&rating=G&lang=pt';
-      _stickerSeacrh =
-          'https://api.giphy.com/v1/stickers/search?api_key=R90RJFr48097DIwu8AmbB2aCVi0CaSxW&q=$_search&limit=19&offset=$_offSet&rating=G&lang=en';
 
       response = await http.get(_gifSearch);
     }
