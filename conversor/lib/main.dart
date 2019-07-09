@@ -19,6 +19,7 @@ void main() async {
     title: 'Conversor',
     home: Home(),
     theme: ThemeData(hintColor: Colors.amber, primaryColor: Colors.white),
+    debugShowCheckedModeBanner: false,
   ));
 }
 
