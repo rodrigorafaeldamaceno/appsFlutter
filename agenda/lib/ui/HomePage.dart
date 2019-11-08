@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:agenda/helpers/ContactPage.dart';
+import 'package:agenda/helpers/contactPage.dart';
 import 'package:agenda/helpers/contacts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
